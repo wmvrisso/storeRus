@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
+import ProductCard from '../components/productcard';
 
 function ProductSearch () {
     const [products, setProducts] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [loading, setLoading] = useState(false);
-    const [searched, setSearched] = useState(false);//may not need
     const [filteredProducts, setFilteredProducts] = useState([]);
 
     useEffect(() => {
@@ -56,11 +56,11 @@ function ProductSearch () {
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
                 {filteredProducts.length > 0 ? (
                 filteredProducts.map(product => (
-                    <div key={product.id} style={{ border: '1px solid #ccc', padding: '10px', width: '200px' }}>
-                    <img src={product.thumbnail} alt={product.title} style={{ width: '100%', height: 'auto' }} />
-                    <h2 style={{ fontSize: '1rem' }}>{product.title}</h2>
-                    <p>${product.price}</p>
-                    </div>
+                    <ProductCard
+                        key={product.id}
+                        product={product}
+                        //need to add add to cart functionality here.
+                    />
                 ))
                 ) : (
                 <p>No products found for "{searchTerm}"</p>
