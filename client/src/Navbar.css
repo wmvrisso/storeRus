@@ -1,0 +1,35 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: antiquewhite;
+  color: blueviolet;
+  padding: 1rem;
+}
+
+.navbar-left .logo {
+
+}
+
+.navbar-center .nav-links {
+  list-style-type: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-center .nav-links li {
+  margin-right: 1rem;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-right .shopping-cart,
+.navbar-right .sign-in {
+  text-decoration: none;
+  margin-left: 1rem;
+  position: relative;
+}
