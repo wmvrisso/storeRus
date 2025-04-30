@@ -17,7 +17,7 @@ const router = createBrowserRouter([
         element: <Search />
       },
       {
-        index: '/cart',
+        path: '/cart',
         element:<Cart />
       }
     ],

@@ -1,5 +1,6 @@
-import { useQuery } from '@apollo/client';
-import { GET_CART, REMOVE_FROM_CART } from '../utils/queries';
+import { useQuery, useMutation } from '@apollo/client';
+import { GET_CART } from '../utils/queries';
+import { REMOVE_FROM_CART } from '../utils/mutations';
 import { useNavigate } from 'react-router-dom';
 
 function Cart() {

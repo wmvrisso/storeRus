@@ -3,40 +3,75 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  --bg-card: #ffffff;
+  --text-color: #333333;
+  --button-bg: #0070f3;
+  --button-text: #ffffff;
+  --button-bg-hover: #005bb5;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+[data-theme='dark'] {
+  --bg-card: #1e1e1e;
+  --text-color: #f0f0f0;
+  --button-bg: #3794ff;
+  --button-text: #ffffff;
+  --button-bg-hover: #1f6feb;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Product Card Component Styling */
+.product-card {
+  border: 1p solid #e0e0e0;
+  border-radius: 8px;
+  padding: 10px;
+  width: 100%;
+  max-width: 260px;
+  background-color: var(--bg-card);
+  transition: box-shadow 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.product-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-.card {
-  padding: 2em;
+.product-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+  margin-bottom: 12px;
 }
 
-.read-the-docs {
-  color: #888;
+.product-card h2 {
+  font-size: 1rem;
+  font-family: sans-serif;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 8px;
+  color: var(--text-color);
+}
+
+.product-card p {
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.product-card button {
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  padding: 10px 16px;
+  font-family: sans-serif;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.product-card button:hover {
+  background-color: var(--button-bg-hover);
+  filter: brightness(0.95);
+  color: var(--button-text);
 }
