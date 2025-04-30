@@ -1,36 +1,82 @@
-const express = require('express');
-const cors = require('cors');
+// import express from "express";
+// import path from "node:path";
+// import db from "./config/connection.js";
+// import { ApolloServer } from "@apollo/server";
+// import { expressMiddleware } from "@apollo/server/express4";
+// import { typeDefs, resolvers } from "./schemas/index.js";
+// import { authenticateToken } from "./services/auth.js";
+// import { fileURLToPath } from "node:url";
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
+// const app = express();
+// const PORT = process.env.PORT || 3001;
+// const server = new ApolloServer({
+//   typeDefs,
+//   resolvers,
+// });
+// const startApolloServer = async () => {
+//   await server.start();
+//   await db();
+//   app.use(express.urlencoded({ extended: true }));
+//   app.use(express.json());
+//   app.use(
+//     "/graphql",
+//     expressMiddleware(server as any, {
+//       context: authenticateToken as any,
+//     })
+//   );
+//   // if we're in production, serve client/build as static assets
+//   if (process.env.NODE_ENV === "production") {
+//     app.use(express.static(path.join(__dirname, "../../client/dist")));
+//   }
+//   app.listen(PORT, () => console.log(`:earth_africa: Now listening on localhost:${PORT}`));
+// };
+// startApolloServer();
+
+
+
+import express from "express";
+import { ApolloServer } from "@apollo/server";
+import { expressMiddleware } from "@apollo/server/express4";
+import cors from "cors";
+import http from "http";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import typeDefs from "./schema/typeDefs.js";
+import resolvers from "./schema/resolvers.js";
+import { authMiddleware } from "./services/auth.js";
+
+dotenv.config();
+
 const app = express();
-const PORT = process.env.PORT || 5000;
+const httpServer = http.createServer(app);
 
-app.use(express.json());
-app.use(cors()); // Enable CORS middleware
+const startApolloServer = async () => {
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+  });
 
-// Endpoint to fetch books from a fake API
-app.get('/api/books', async (req, res) => {
-  try {
-    // Fetch data from a fake API
-    const response = await fetch('FAKE API go here'); // Replace with your desired fake API URL
-    const books = await response.json();
+  await server.start();
 
-    // Map the fake data to match your Book schema structure
-    const mappedBooks = books.map(book => ({
-      title: book.title,
-      author: 'Unknown Author', // Placeholder value since fake API might not have an author field
-      genre: 'Unknown Genre',  // Placeholder value
-      description: book.body,  // Use the body of the fake API's post
-      price: Math.floor(Math.random() * 50) + 10, // Generate a random price
-      image: 'https://via.placeholder.com/150', // Placeholder image
-    }));
+  app.use(
+    "/graphql",
+    cors(),
+    express.json(),
+    expressMiddleware(server, {
+      context: async ({ req }) => authMiddleware({ req }),
+    })
+  );
 
-    // Send the mapped books as a JSON response
-    res.json(mappedBooks);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Failed to fetch books from the API' });
-  }
-});
+  const PORT = process.env.PORT || 4000;
+  mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/yourDB");
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+  mongoose.connection.once("open", () => {
+    console.log("🟢 MongoDB connected");
+    httpServer.listen(PORT, () =>
+      console.log(`🚀 Server running at http://localhost:${PORT}/graphql`)
+    );
+  });
+};
+
+startApolloServer();
