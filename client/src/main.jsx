@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import App from './App';
 import Search from './pages/search';
+import Cart from './pages/cart'
 import NotFound from './pages/notfound';
 
 const router = createBrowserRouter([
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
         index: true,
         element: <Search />
       },
+      {
+        index: '/cart',
+        element:<Cart />
+      }
     ],
   },
 ]);
