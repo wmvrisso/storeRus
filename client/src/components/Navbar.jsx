@@ -1,12 +1,13 @@
 import React from 'react';
 import '../Navbar.css';
+import StoreRusLogo from "../assets/StoreRus.com logo.png";
 
 const Navbar = () => {
   return (
 
     <nav className="navbar">
       <div className="navbar-left">
-        <a href="/" className="logo"><img src="../assets/StoreRus.com logo.png"/></a>
+        <a href="/" className="logo"><img src= {StoreRusLogo}/></a>
       </div>
       <div className="navbar-center">
         <ul className="nav-links">
