@@ -24,7 +24,7 @@ const resolvers = {
       if (!user) {
         return { message: "Something is wrong!" };
       }
-      const token = signToken(user.username, user.password, user._id);
+      const token = signToken(user);
       return { token, user };
     },
     login: async (_parent, args) => {
@@ -40,7 +40,7 @@ const resolvers = {
       if (!correctPw) {
         return { message: "Wrong password!" };
       }
-      const token = signToken(user.username, user.password, user._id);
+      const token = signToken(user);
       return { token, user };
     },
 
