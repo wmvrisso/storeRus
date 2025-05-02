@@ -1,7 +1,7 @@
 // import user model
 import User from "../models/User.js";
 // import sign token function from auth
-import { signToken } from "../services/auth.js";
+import { signToken } from "../auth.js";
 
 const resolvers = {
   Query: {
