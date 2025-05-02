@@ -45,4 +45,20 @@ export const REMOVE_FROM_CART = gql `
             id
         }        
     }
+`
+export const ADD_PROFILE = gql`
+  mutation addProfile($input: ProfileInput!) {
+    addProfile(input: $input) {
+      token
+      profile {
+        _id
+        name
+      }
+    }
+  }
 `;
+
+
+
+
+
