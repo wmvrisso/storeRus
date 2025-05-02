@@ -18,6 +18,15 @@ const resolvers = {
     me: async (_parent, _args, context) => {
       if (!context.user) return null;
       return await User.findById(context.user._id);
+    },
+    getCart: async () => {
+      try {
+        const cartItems = await Cart.find();
+        return cartItems;
+      } catch(err) {
+        console.error('Error fetching cart:', err)
+        throw new Error('Failed to fetch cart');
+      }
     }
   },
 

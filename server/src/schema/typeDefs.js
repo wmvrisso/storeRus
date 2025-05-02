@@ -39,6 +39,7 @@ const typeDefs = `
   type Query {
     me:User
     getSingleUser: User
+    getCart: [CartItem]
   }
 
   type Mutation {
