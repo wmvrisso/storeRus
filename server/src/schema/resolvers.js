@@ -19,7 +19,7 @@ const resolvers = {
       return await User.findById(context.user._id);
     }
   },
-  
+
   Mutation: {
     addUser: async (_parent, args) => {
       console.log(args);
@@ -37,13 +37,13 @@ const resolvers = {
         $or: [{ username: args.username }, { email: args.email }],
       });
       if (!user) {
-        return { message: "Can't find this user" };
+        throw new Error("Can't find this user");
       }
 
       const correctPw = await user.isCorrectPassword(args.password);
 
       if (!correctPw) {
-        return { message: "Wrong password!" };
+        throw new Error("Wrong password!");
       }
       const token = signToken(user);
       return { token, user };
