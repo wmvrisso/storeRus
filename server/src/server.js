@@ -64,12 +64,12 @@ const startApolloServer = async () => {
     cors(),
     express.json(),
     expressMiddleware(server, {
-      context: async ({ req }) => authMiddleware({ req }),
+      context: async ({ req }) => ({}),
     })
   );
 
   const PORT = process.env.PORT || 4000;
-  mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/yourDB");
+  mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/storeDB");
 
   mongoose.connection.once("open", () => {
     console.log("🟢 MongoDB connected");
