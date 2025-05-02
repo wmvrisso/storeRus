@@ -44,7 +44,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import typeDefs from "./schema/typeDefs.js";
 import resolvers from "./schema/resolvers.js";
-import { authMiddleware } from "./services/auth.js";
+import { authMiddleware } from "./auth.js";
 
 dotenv.config();
 
