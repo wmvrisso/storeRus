@@ -25,6 +25,15 @@ export const ADD_USER = gql`
     }
 `;
 
+export const UPDATE_CART_QUANTITY = gql`
+    mutation UpdateCartQuantity($cartItemId: ID!, $quantity: Int!) {
+        updateCartQuantity(cartItemId: $cartItemId, quantity: $quantity) {
+            id
+            quantity
+        }
+    }
+`;
+
 export const ADD_TO_CART = gql`
     mutation addToCart($productData: ProductInput!) {
         addToCart(productData: $productData) {
@@ -38,13 +47,18 @@ export const ADD_TO_CART = gql`
     }
 `;
 
-export const REMOVE_FROM_CART = gql `
-    mutation RemoveFromCart($cartItemId: ID!) {
-        removeFromCart(cartItemId: $cartItemId) {
+export const DELETE_CART_ITEM = gql `
+    mutation DeleteCartItem($cartItemId: ID!) {
+        deleteCartItem(cartItemId: $cartItemId) {
             id
+            productId
+            title
+            price
+            image
+            quantity
         }        
     }
-`
+`;
 export const ADD_PROFILE = gql`
   mutation addProfile($input: ProfileInput!) {
     addProfile(input: $input) {

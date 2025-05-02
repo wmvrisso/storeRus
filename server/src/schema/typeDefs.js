@@ -46,7 +46,8 @@ const typeDefs = `
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
     addToCart(productData: ProductInput!): CartItem
-    deleteProduct(productId: String!): User
+    deleteCartItem(cartItemId: ID!): [CartItem]
+    updateCartQuantity(cartItemId: ID!, quantity: Int!): CartItem
   }
 `;
 

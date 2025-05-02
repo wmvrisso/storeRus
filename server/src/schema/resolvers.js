@@ -97,17 +97,42 @@ const resolvers = {
     //   }
     // },
 
-    deleteProduct: async (_parent, args, context) => {
-      const updatedUser = await User.findOneAndUpdate(
-        { _id: context.user._id },
-        { $pull: { savedProducts: { productId: args.productId } } },
-        { new: true }
-      );
-      if (!updatedUser) {
-        return { message: "Couldn't find user with this id!" };
+    updateCartQuantity: async (_, { cartItemId, quantity }) => {
+      try {
+        const updatedItem = await Cart.findByIdAndUpdate(
+          cartItemId,
+          { quantity },
+          { new: true }
+        );
+        return updatedItem;
+      } catch(err) {
+        console.error('Error updating quantity:', err);
+        throw new Error('Failed to update quantity');
       }
-      return updatedUser;
     },
+
+    deleteCartItem: async (_, { cartItemId }) => {
+      try{
+        await Cart.findByIdAndDelete(cartItemId);
+        const updatedCart = await Cart.find();
+        return updatedCart;
+      } catch (err) {
+        console.error('Error removing item:', err);
+        throw new Error('Failed to remove item from cart.');
+      }
+    }
+
+    // deleteProduct: async (_parent, args, context) => {
+    //   const updatedUser = await User.findOneAndUpdate(
+    //     { _id: context.user._id },
+    //     { $pull: { savedProducts: { productId: args.productId } } },
+    //     { new: true }
+    //   );
+    //   if (!updatedUser) {
+    //     return { message: "Couldn't find user with this id!" };
+    //   }
+    //   return updatedUser;
+    // },
   },
 };
 
