@@ -2,7 +2,7 @@
 import User from "../models/User.js";
 import Cart from '../models/Order.js';
 // import sign token function from auth
-//import { signToken } from "../services/auth.js";
+import { signToken } from "../auth.js";
 
 const resolvers = {
   Query: {
@@ -15,7 +15,12 @@ const resolvers = {
 
       return foundUser;
     },
+    me: async (_parent, _args, context) => {
+      if (!context.user) return null;
+      return await User.findById(context.user._id);
+    }
   },
+
   Mutation: {
     addUser: async (_parent, args) => {
       console.log(args);
@@ -25,7 +30,7 @@ const resolvers = {
       if (!user) {
         return { message: "Something is wrong!" };
       }
-      const token = signToken(user.username, user.password, user._id);
+      const token = signToken(user);
       return { token, user };
     },
     
@@ -34,15 +39,15 @@ const resolvers = {
         $or: [{ username: args.username }, { email: args.email }],
       });
       if (!user) {
-        return { message: "Can't find this user" };
+        throw new Error("Can't find this user");
       }
 
       const correctPw = await user.isCorrectPassword(args.password);
 
       if (!correctPw) {
-        return { message: "Wrong password!" };
+        throw new Error("Wrong password!");
       }
-      const token = signToken(user.username, user.password, user._id);
+      const token = signToken(user);
       return { token, user };
     },
 
