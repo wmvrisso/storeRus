@@ -29,6 +29,7 @@ const typeDefs = gql`
   }
 
   type Query {
+  me:user
     getSingleUser: User
   }
 

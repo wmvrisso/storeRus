@@ -14,7 +14,12 @@ const resolvers = {
 
       return foundUser;
     },
+    me: async (_parent, _args, context) => {
+      if (!context.user) return null;
+      return await User.findById(context.user._id);
+    }
   },
+  
   Mutation: {
     addUser: async (_parent, args) => {
       console.log(args);
