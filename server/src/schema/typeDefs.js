@@ -1,6 +1,5 @@
-import { gql } from "graphql-tag";
 
-const typeDefs = gql`
+const typeDefs = `
   type User {
     _id: ID!
     username: String!
@@ -14,6 +13,15 @@ const typeDefs = gql`
     title: String
     price: String
     image: String
+  }
+  
+  type CartItem{
+    id: ID!
+    productId: String!
+    title: String
+    price: String
+    image: String
+    quantity: Int
   }
 
   type Auth {
@@ -31,12 +39,13 @@ const typeDefs = gql`
   type Query {
     me:User
     getSingleUser: User
+    getCart: [CartItem]
   }
 
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    saveProduct(productData: ProductInput!): User
+    addToCart(productData: ProductInput!): CartItem
     deleteProduct(productId: String!): User
   }
 `;

@@ -2,15 +2,13 @@ import { gql } from '@apollo/client';
 
 export const GET_CART = gql`
     query GetCart {
-        cart{
+        getCart{
             id
+            productId
+            title
+            price
+            image
             quantity
-            product {
-                id
-                title
-                price
-                thumbnail
-            }
         }
     }
 `

@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { GET_CART } from '../utils/queries';
 import { REMOVE_FROM_CART } from '../utils/mutations';
 import { useNavigate } from 'react-router-dom';
@@ -17,7 +17,7 @@ function Cart() {
         return <p>Error loading cart. Are you logged in?</p>
     }
 
-    const cartItems = data.cart;
+    const cartItems = data.getCart;
 
     if (!cartItems.length) {
         return (
@@ -29,27 +29,42 @@ function Cart() {
     }
 
     const total = cartItems.reduce(
-        (sum, item) => sum + item.quantity * item.product.price,
+        (sum, item) => sum + item.quantity * Number(item.price),
         0
     )
 
     return (
-        <div style = {{padding: '20px'}}>
+        <div className="cart-container">
             <h1>Your Cart</h1>
             {cartItems.map(item => (
-                <div key={item.id} style={{borderBottom: '1px solid #ccc', padding: '10px'}}>
-                    <img src={item.product.thumbnail} alt={item.product.title} style={{width: '100px'}}/>
-                    <h2>{item.product.title}</h2>
-                    <p>
-                        ${item.product.price} * {item.quantity}
-                    </p>
-                    <p>Subtotal: ${(item.quantity * item.product.price).toFixed(2)}</p>
-                    <button onClick={() => removeFromCart({ variables: { cartItemId: item.id } })}>
-                        Remove
-                    </button>
+                <div key={item.id} className="cart-item">
+                    <div className="cart-item-left">
+                        <img src={item.image} alt={item.title}/>
+                        <div>
+                            <div className="cart-item-title">{item.title}</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="cart-item-right">
+                            <div className="cart-item-price">${item.price}</div>
+                            <div className="cart-item-quantity">QTY: {item.quantity}</div>
+                            <div className="cart-item-subtotal">
+                                Subtotal: ${(Number(item.price) * item.quantity).toFixed(2)}
+                            </div>
+                            <button 
+                                className="cart-item-remove"
+                                onClick={() => removeFromCart({ variables: { cartItemId: item.id } })}
+                            >
+                                Remove
+                            </button>
+                        </div>
+                    </div>  
                 </div>
             ))}
-            <h2>Total: ${total.toFixed(2)}</h2>
+            <div className="cart-total-container">
+                <div className="cart-total-label">Cart Total</div>
+                <div className="cart-total-value">${total.toFixed(2)}</div>
+            </div>
         </div>
     )
 }

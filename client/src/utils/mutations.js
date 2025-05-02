@@ -26,15 +26,14 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_TO_CART = gql`
-    mutation addToCart($productID: ID!) {
-        addToCart(productId: $productId) {
+    mutation addToCart($productData: ProductInput!) {
+        addToCart(productData: $productData) {
             id
+            productId
+            title
+            price
+            image
             quantity
-            product {
-                title
-                price
-                thumbnail
-            }
         }
     }
 `;

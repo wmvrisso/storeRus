@@ -7,7 +7,14 @@ function ProductCard({ product }) {
     const handleAddToCart = async () => {
         try {
             await addToCart({
-                variables: { productId: product.id }
+                variables: { 
+                    productData:{
+                        productId: product.id.toString(),
+                        title: product.title,
+                        price: product.price.toString(),
+                        image: product.thumbnail
+                    }
+                }
             });
             alert('Added to cart!');
         } catch (err) {
@@ -17,16 +24,14 @@ function ProductCard({ product }) {
     };
 
     return (
-        <div style={{ border: '1px solid #ccc', padding: '10px', width: '200px' }}>
+        <div className="product-card">
             <img
                 src={product.thumbnail}
                 alt={product.title}
-                style={{ width: '100%', height: 'auto'}}
             />
-            <h2 style={{ fontSize: '1rem'}}>{product.title}</h2>
+            <h2>{product.title}</h2>
             <p>${product.price}</p>
-            {/* Need to add functionality here. */}
-            <button onClick={handleAddToCart}>Add to Cart</button> 
+            <button onClick={handleAddToCart}>ADD TO CART</button> 
         </div>
     )
 }
