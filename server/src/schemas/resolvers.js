@@ -1,7 +1,8 @@
 // import user model
 import User from "../models/User.js";
+import Cart from '../models/Order.js';
 // import sign token function from auth
-import { signToken } from "../services/auth.js";
+//import { signToken } from "../services/auth.js";
 
 const resolvers = {
   Query: {
@@ -27,6 +28,7 @@ const resolvers = {
       const token = signToken(user.username, user.password, user._id);
       return { token, user };
     },
+    
     login: async (_parent, args) => {
       const user = await User.findOne({
         $or: [{ username: args.username }, { email: args.email }],
@@ -44,24 +46,42 @@ const resolvers = {
       return { token, user };
     },
 
-    saveProduct: async (_parent, args, context) => {
-      // check if user is logged in
-      if (!context.user) {
-        throw new Error("You need to be logged in!");
-      }
-
+    addToCart: async (_, { productData }) => {
       try {
-        const updatedUser = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $addToSet: { savedProducts: args.productData } },
-          { new: true, runValidators: true }
-        );
-        return updatedUser;
+        const existingItem = await Cart.findOne({ productId: productData.productId });
+
+        if (existingItem) {
+          existingItem.quantity += 1;
+          await existingItem.save();
+          return existingItem;
+        }
+
+        const newItem = await Cart.create(productData);
+        return newItem;
       } catch (err) {
-        console.log(err);
-        return err;
+        console.error('Error in addToCart:', err);
+        throw new Error('Failed to add item to cart');
       }
     },
+
+    // addToCart: async (_parent, args, context) => {
+    //   // check if user is logged in
+    //   if (!context.user) {
+    //     throw new Error("You need to be logged in!");
+    //   }
+
+    //   try {
+    //     const updatedUser = await User.findOneAndUpdate(
+    //       { _id: context.user._id },
+    //       { $addToSet: { savedProducts: args.productData } },
+    //       { new: true, runValidators: true }
+    //     );
+    //     return updatedUser;
+    //   } catch (err) {
+    //     console.log(err);
+    //     return err;
+    //   }
+    // },
 
     deleteProduct: async (_parent, args, context) => {
       const updatedUser = await User.findOneAndUpdate(

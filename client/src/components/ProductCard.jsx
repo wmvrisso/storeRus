@@ -7,7 +7,14 @@ function ProductCard({ product }) {
     const handleAddToCart = async () => {
         try {
             await addToCart({
-                variables: { productId: product.id }
+                variables: { 
+                    productData:{
+                        productId: product.id.toString(),
+                        title: product.title,
+                        price: product.price.toString(),
+                        image: product.thumbnail
+                    }
+                }
             });
             alert('Added to cart!');
         } catch (err) {

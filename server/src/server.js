@@ -42,9 +42,9 @@ import cors from "cors";
 import http from "http";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import typeDefs from "./schema/typeDefs.js";
-import resolvers from "./schema/resolvers.js";
-import { authMiddleware } from "./services/auth.js";
+import typeDefs from "./schemas/typeDefs.js";
+import resolvers from "./schemas/resolvers.js";
+//import { authMiddleware } from "./services/auth.js";
 
 dotenv.config();
 
@@ -64,12 +64,12 @@ const startApolloServer = async () => {
     cors(),
     express.json(),
     expressMiddleware(server, {
-      context: async ({ req }) => authMiddleware({ req }),
+      context: async ({ req }) => ({}),
     })
   );
 
   const PORT = process.env.PORT || 4000;
-  mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/yourDB");
+  mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/storeDB");
 
   mongoose.connection.once("open", () => {
     console.log("🟢 MongoDB connected");
