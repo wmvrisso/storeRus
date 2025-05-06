@@ -9,8 +9,8 @@ import typeDefs from "./schema/typeDefs.js";
 import resolvers from "./schema/resolvers.js";
 import { authMiddleware } from "./auth.js";
 
-import path from 'path';
-import { fileURLToPath } from 'url';
+import path from "path";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -30,22 +30,24 @@ const startApolloServer = async () => {
 
   app.use(
     "/graphql",
-    cors(),
-    express.json(),
+    // cors(),
+    // express.json(),
     expressMiddleware(server, {
       context: async ({ req }) => ({}),
     })
   );
 
   const PORT = process.env.PORT || 4000;
-  mongoose.connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/storeDB");
+  mongoose.connect(
+    process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/storeDB"
+  );
 
   mongoose.connection.once("open", () => {
     console.log("🟢 MongoDB connected");
 
-    app.use(express.static(path.resolve(__dirname, '../../client/dist')));
-    app.get('*', (_req, res) => {
-      res.sendFile(path.resolve(__dirname, '../../client/dist/index.html'));
+    app.use(express.static(path.resolve(__dirname, "../../client/dist")));
+    app.get("*", (_req, res) => {
+      res.sendFile(path.resolve(__dirname, "../../client/dist/index.html"));
     });
 
     httpServer.listen(PORT, () =>
