@@ -35,6 +35,68 @@ body {
   margin-bottom: 16px;
 }
 
+/* Login Page */
+.auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 16px;
+  min-height: 70vh;
+  background-color: #f9f9f9;
+}
+
+.auth-form {
+  background-color: #fff;
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  max-width: 400px;
+  width: 100%;
+}
+
+.auth-form h2 {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.5rem;
+  margin-bottom: 24px;
+  text-align: center;
+  color: #333;
+}
+
+.auth-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.auth-form input {
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.2s ease;
+}
+
+.auth-form input:focus {
+  border-color: rgb(72, 208, 167);
+  outline: none;
+}
+
+.auth-form button {
+  padding: 12px;
+  font-size: 1rem;
+  background-color: rgb(72, 208, 167);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.auth-form button:hover {
+  background-color: rgb(58, 174, 139);
+}
+
+
 /* Product Card Component Styling */
 .product-card {
   border: 1p solid #e0e0e0;
