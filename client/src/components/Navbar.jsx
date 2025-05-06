@@ -2,6 +2,7 @@ import React from 'react';
 import '../Navbar.css';
 import StoreRusLogo from "../assets/StoreRus.com logo.png";
 import ShoppingCart from "../assets/shopping-cart.png"
+import {Link} from 'react-router-dom';
 const Navbar = () => {
   return (
 
@@ -20,10 +21,10 @@ const Navbar = () => {
       <div className="navbar-right">
         <ul className="links-right">
           <li>
-            <a href="/signup" id="sign-up">Sign Up</a>
+            <Link to="/signup" id="sign-up"> Sign Up</Link>
           </li>
           <li>
-            <a href="/login" id="sign-in">Sign In</a>
+            <Link to="/login" id="sign-in"> Sign In</Link>
           </li>
           <li>
             <a href="/cart" id="shopping-cart"><img src={ShoppingCart} width={75} height={50}/></a>
