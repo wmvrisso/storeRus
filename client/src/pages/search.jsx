@@ -44,7 +44,7 @@ function ProductSearch () {
 
     return (
         <div style={{ padding: '20px' }}>
-            <h1>Product List</h1>
+            <h2 className='slogan'>Everything you need. All in one place.</h2>
             <input
                 type="text"
                 placeholder="Search products..."

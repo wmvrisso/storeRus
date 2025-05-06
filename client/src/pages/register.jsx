@@ -40,65 +40,63 @@ const Signup = () => {
   };
 
   return (
-    <main >
-      <div>
+    <div className="auth-page">
+      <div className="auth-form">
+        <h2>Sign Up</h2>
         <div>
-          <h4>Sign Up</h4>
-          <div>
-            {data ? (
-              <p>
-                Success! You may now head{' '}
-                <Link to="/">back to the homepage.</Link>
-              </p>
-            ) : (
-              <form onSubmit={handleFormSubmit}>
-                <input
-                  required
-                  className="form-input"
-                  placeholder="Your username"
-                  name="name"
-                  type="text"
-                  value={formState.name}
-                  onChange={handleChange}
-                />
-                <input
-                  required
-                  className="form-input"
-                  placeholder="Your email"
-                  name="email"
-                  type="email"
-                  value={formState.email}
-                  onChange={handleChange}
-                />
-                <input
-                  required
-                  className="form-input"
-                  placeholder="******"
-                  name="password"
-                  type="password"
-                  value={formState.password}
-                  onChange={handleChange}
-                />
-                <button
-                  className="btn btn-block btn-info"
-                  style={{ cursor: 'pointer' }}
-                  type="submit"
-                  disabled={loading}
-                >
-                  {loading ? 'Submitting...' : 'Submit'}
-                </button>
-              </form>
-            )}
+          {data ? (
+            <p>
+              Success! You may now head{' '}
+              <Link to="/">back to the homepage.</Link>
+            </p>
+          ) : (
+            <form onSubmit={handleFormSubmit}>
+              <input
+                required
+                className="form-input"
+                placeholder="Username"
+                name="name"
+                type="text"
+                value={formState.name}
+                onChange={handleChange}
+              />
+              <input
+                required
+                className="form-input"
+                placeholder="Email"
+                name="email"
+                type="email"
+                value={formState.email}
+                onChange={handleChange}
+              />
+              <input
+                required
+                className="form-input"
+                placeholder="Password"
+                name="password"
+                type="password"
+                value={formState.password}
+                onChange={handleChange}
+              />
+              <button
+                className="btn btn-block btn-info"
+                style={{ cursor: 'pointer' }}
+                type="submit"
+                disabled={loading}
+              >
+                {loading ? 'Submitting...' : 'Create Account'}
+              </button>
+            </form>
+          )}
 
-            {error && (
-              <div>
-                {error.message}
-              </div>
-            )}
-          </div>
+          {error && (
+            <div>
+              {error.message}
+            </div>
+          )}
         </div>
       </div>
-    </main>
+    </div>
   );
 };
 

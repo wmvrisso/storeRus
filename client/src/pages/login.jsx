@@ -46,55 +46,49 @@ const Login = () => {
   };
 
   return (
-    <main>
-      <div>
+    <div className="auth-page">
+      <div className="auth-form">
+        <h2>Login</h2>
         <div>
-          <h4>Login</h4>
-          <div>
-            {data ? (
-              <p>
-                Success! You may now head <Link to="/">back to the homepage.</Link>
-              </p>
-            ) : (
-              <form onSubmit={handleFormSubmit}>
-                <input
-                  className="form-input"
-                  placeholder="Your email"
-                  name="email"
-                  type="email"
-                  value={formState.email}
-                  onChange={handleChange}
-                  autoComplete="email"
-                />
-                <input
-                  className="form-input"
-                  placeholder="******"
-                  name="password"
-                  type="password"
-                  value={formState.password}
-                  onChange={handleChange}
-                  autoComplete="current-password"
-                />
-                <button
-                  className="btn btn-block btn-info"
-                  style={{ cursor: 'pointer' }}
-                  type="submit"
-                  disabled={loading}
-                >
-                  {loading ? 'Logging in...' : 'Submit'}
-                </button>
-              </form>
-            )}
+          {data ? (
+            <p>
+              Success! You may now head <Link to="/">back to the homepage.</Link>
+            </p>
+          ) : (
+            <form onSubmit={handleFormSubmit}>
+              <input
+                placeholder="Email"
+                name="email"
+                type="email"
+                value={formState.email}
+                onChange={handleChange}
+                autoComplete="email"
+              />
+              <input
+                placeholder="Password"
+                name="password"
+                type="password"
+                value={formState.password}
+                onChange={handleChange}
+                autoComplete="current-password"
+              />
+              <button
+                type="submit"
+                disabled={loading}
+              >
+                {loading ? 'Logging in...' : 'Submit'}
+              </button>
+            </form>
+          )}
 
-            {error && (
-              <div className="my-3 p-3 bg-danger text-white">
-                {error.message}
-              </div>
-            )}
-          </div>
+          {error && (
+            <div>
+              {error.message}
+            </div>
+          )}
         </div>
       </div>
-    </main>
+    </div>
   );
 };
 
