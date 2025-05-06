@@ -42,14 +42,15 @@ const Signup = () => {
   };
 
   return (
-    <main>
+    <main >
       <div>
         <div>
           <h4>Sign Up</h4>
           <div>
             {data ? (
               <p>
-                Success! You may now head <Link to="/">back to the homepage.</Link>
+                Success! You may now head{' '}
+                <Link to="/">back to the homepage.</Link>
               </p>
             ) : (
               <form onSubmit={handleFormSubmit}>
@@ -59,7 +60,7 @@ const Signup = () => {
                   placeholder="Your username"
                   name="username"
                   type="text"
-                  value={formState.username}
+                  value={formState.name}
                   onChange={handleChange}
                 />
                 <input
@@ -91,14 +92,14 @@ const Signup = () => {
               </form>
             )}
 
-            {error && (
-              <div>
-                {error.message}
-              </div>
-            )}
-          </div>
+          {error && (
+            <div>
+              {error.message}
+            </div>
+          )}
         </div>
       </div>
+    </div>
     </main>
   );
 };
