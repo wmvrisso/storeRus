@@ -69,7 +69,7 @@ const startApolloServer = async () => {
   );
 
   const PORT = process.env.PORT || 4000;
-  mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/storeDB");
+  mongoose.connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/storeDB");
 
   mongoose.connection.once("open", () => {
     console.log("🟢 MongoDB connected");
