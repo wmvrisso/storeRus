@@ -38,14 +38,14 @@ const startApolloServer = async () => {
   );
 
   const PORT = process.env.PORT || 4000;
-  mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/storeDB");
+  mongoose.connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/storeDB");
 
   mongoose.connection.once("open", () => {
     console.log("🟢 MongoDB connected");
 
-    app.use(express.static(path.join(__dirname, '../client/dist')));
-    app.get('*', (req, res) => {
-      res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+    app.use(express.static(path.resolve(__dirname, '../../client/dist')));
+    app.get('*', (_req, res) => {
+      res.sendFile(path.resolve(__dirname, '../../client/dist/index.html'));
     });
 
     httpServer.listen(PORT, () =>

@@ -27,7 +27,7 @@ const Navbar = () => {
             <Link to="/login" id="sign-in"> Sign In</Link>
           </li>
           <li>
-            <a href="#" id="shopping-cart"><img src={ShoppingCart} width={75} height={50}/></a>
+            <a href="/cart" id="shopping-cart"><img src={ShoppingCart} width={75} height={50}/></a>
           </li>
           
         </ul>
