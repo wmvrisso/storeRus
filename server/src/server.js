@@ -44,7 +44,7 @@ const startApolloServer = async () => {
     console.log("🟢 MongoDB connected");
 
     app.use(express.static(path.resolve(__dirname, '../../client/dist')));
-    app.get('/*', (_req, res) => {
+    app.get('*', (_req, res) => {
       res.sendFile(path.resolve(__dirname, '../../client/dist/index.html'));
     });
 
