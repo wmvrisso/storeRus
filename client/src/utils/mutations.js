@@ -25,8 +25,6 @@ export const ADD_USER = gql`
     }
 `;
 
-<<<<<<< HEAD
-=======
 export const UPDATE_CART_QUANTITY = gql`
     mutation UpdateCartQuantity($cartItemId: ID!, $quantity: Int!) {
         updateCartQuantity(cartItemId: $cartItemId, quantity: $quantity) {
@@ -35,7 +33,6 @@ export const UPDATE_CART_QUANTITY = gql`
         }
     }
 `;
->>>>>>> 7e158bfcba4144c298f563dd84517521151a5b4e
 
 export const ADD_TO_CART = gql`
     mutation addToCart($productData: ProductInput!) {
