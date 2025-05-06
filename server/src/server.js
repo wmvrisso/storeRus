@@ -30,8 +30,8 @@ const startApolloServer = async () => {
 
   app.use(
     "/graphql",
-    // cors(),
-    // express.json(),
+    cors(),
+    express.json(),
     expressMiddleware(server, {
       context: async ({ req }) => ({}),
     })
@@ -46,7 +46,7 @@ const startApolloServer = async () => {
     console.log("🟢 MongoDB connected");
 
     app.use(express.static(path.resolve(__dirname, "../../client/dist")));
-    app.get("*", (_req, res) => {
+    app.get("\\*", (_req, res) => {
       res.sendFile(path.resolve(__dirname, "../../client/dist/index.html"));
     });
 
