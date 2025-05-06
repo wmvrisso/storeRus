@@ -8,7 +8,8 @@
     "start": "node src/server.js",
     "watch": "npx nodemon",
     "seed": "npm run build && node dist/seeds/seed.js",
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon src/server.js",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
