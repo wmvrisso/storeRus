@@ -1,37 +1,29 @@
 import React from 'react';
-import '../Navbar.css';
+// import '../Navbar.css';
 import StoreRusLogo from "../assets/StoreRus.com logo.png";
-import ShoppingCart from "../assets/shopping-cart.png"
+import ShoppingCart from "../assets/shopping-cart.png";
+import { Link } from 'react-router-dom';
+
+
 const Navbar = () => {
   return (
+    <header className="navbar-wrapper">
+      <nav className="navbar">
+        <div className="navbar-left">
+          <Link to="/"><img src= {StoreRusLogo} width={100} height={75}/></Link>
+        </div>
 
-    <nav className="navbar">
-      <div className="navbar-left">
-        <a href="/" className="logo"><img src= {StoreRusLogo} width={100} height={75}/></a>
-      </div>
-      <div className="navbar-center">
-        <ul className="nav-links">
-          <li>
-            <a id="navbar-title" href="/">StoreRus</a>
-          </li>
-          
+        <div className="navbar-center">
+          <Link to="/" id="navbar-title">StoreRus</Link>
+        </div>
+
+        <ul className="navbar-right">
+          <li><Link to="/signup">Sign Up</Link></li>
+          <li><Link to="/login">Login</Link></li>
+          <li><Link to="/cart"><img src={ShoppingCart} className="navbar-logo"/></Link></li>
         </ul>
-      </div>
-      <div className="navbar-right">
-        <ul className="links-right">
-          <li>
-            <a href="/signup" id="sign-up">Sign Up</a>
-          </li>
-          <li>
-            <a href="/login" id="sign-in">Sign In</a>
-          </li>
-          <li>
-            <a href="/cart" id="shopping-cart"><img src={ShoppingCart} width={75} height={50}/></a>
-          </li>
-          
-        </ul>
-      </div>
-    </nav>
+      </nav>
+    </header>
   );
 };
 
