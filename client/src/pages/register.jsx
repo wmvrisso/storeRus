@@ -1,19 +1,17 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import { useMutation } from '@apollo/client';
-import { ADD_PROFILE } from '../utils/mutations';
-
+import { ADD_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 
 const Signup = () => {
   const [formState, setFormState] = useState({
-    name: '',
+    username: '',
     email: '',
     password: '',
   });
 
-  const [addProfile, { loading, error, data }] = useMutation(ADD_PROFILE);
+  const [addUser, { loading, error, data }] = useMutation(ADD_USER);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -29,26 +27,29 @@ const Signup = () => {
     console.log(formState);
 
     try {
-      const { data: mutationData } = await addProfile({
-        variables: { input: { ...formState } },
+      const { data: mutationData } = await addUser({
+        variables: {
+          username: formState.username,
+          email: formState.email,
+          password: formState.password,
+        },
       });
 
-      Auth.login(mutationData.addProfile.token);
+      Auth.login(mutationData.addUser.token);
     } catch (e) {
       console.error(e);
     }
   };
 
   return (
-    <main >
+    <main>
       <div>
         <div>
           <h4>Sign Up</h4>
           <div>
             {data ? (
               <p>
-                Success! You may now head{' '}
-                <Link to="/">back to the homepage.</Link>
+                Success! You may now head <Link to="/">back to the homepage.</Link>
               </p>
             ) : (
               <form onSubmit={handleFormSubmit}>
@@ -56,9 +57,9 @@ const Signup = () => {
                   required
                   className="form-input"
                   placeholder="Your username"
-                  name="name"
+                  name="username"
                   type="text"
-                  value={formState.name}
+                  value={formState.username}
                   onChange={handleChange}
                 />
                 <input
@@ -103,3 +104,4 @@ const Signup = () => {
 };
 
 export default Signup;
+
