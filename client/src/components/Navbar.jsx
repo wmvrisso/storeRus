@@ -20,13 +20,13 @@ const Navbar = () => {
       <div className="navbar-right">
         <ul className="links-right">
           <li>
-            <a href="#" id="sign-up">Sign Up</a>
+            <a href="/signup" id="sign-up">Sign Up</a>
           </li>
           <li>
-            <a href="#" id="sign-in">Sign In</a>
+            <a href="/login" id="sign-in">Sign In</a>
           </li>
           <li>
-            <a href="#" id="shopping-cart"><img src={ShoppingCart} width={75} height={50}/></a>
+            <a href="/cart" id="shopping-cart"><img src={ShoppingCart} width={75} height={50}/></a>
           </li>
           
         </ul>
