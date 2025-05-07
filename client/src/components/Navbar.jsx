@@ -1,5 +1,4 @@
 import React from 'react';
-// import '../Navbar.css';
 import StoreRusLogo from "../assets/StoreRus.com logo.png";
 import ShoppingCart from "../assets/shopping-cart.png";
 import { Link } from 'react-router-dom';
