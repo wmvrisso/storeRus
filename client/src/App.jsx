@@ -24,7 +24,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <UserContext.Provider value={{ user, setUser }}>
-        <div>
+        <div className="page-container">
           <Navbar />
           <Outlet />
         </div>
