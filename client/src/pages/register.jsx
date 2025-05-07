@@ -43,9 +43,9 @@ const Signup = () => {
 
   return (
     <main >
-      <div>
-        <div>
-          <h4>Sign Up</h4>
+      <div className="auth-page">
+        <div className="auth-form">
+          <h2>Sign Up</h2>
           <div>
             {data ? (
               <p>
@@ -57,7 +57,7 @@ const Signup = () => {
                 <input
                   required
                   className="form-input"
-                  placeholder="Your username"
+                  placeholder="Username"
                   name="username"
                   type="text"
                   value={formState.name}
@@ -66,7 +66,7 @@ const Signup = () => {
                 <input
                   required
                   className="form-input"
-                  placeholder="Your email"
+                  placeholder="Email"
                   name="email"
                   type="email"
                   value={formState.email}
@@ -75,7 +75,7 @@ const Signup = () => {
                 <input
                   required
                   className="form-input"
-                  placeholder="******"
+                  placeholder="Password"
                   name="password"
                   type="password"
                   value={formState.password}
@@ -87,7 +87,7 @@ const Signup = () => {
                   type="submit"
                   disabled={loading}
                 >
-                  {loading ? 'Submitting...' : 'Submit'}
+                  {loading ? 'Submitting...' : 'Create Account'}
                 </button>
               </form>
             )}
